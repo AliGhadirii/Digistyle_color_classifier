@@ -123,11 +123,11 @@ X_test_flatten = X_test_orig.reshape(X_test_orig.shape[0], -1).T
 X_train = X_train_flatten/255.
 X_test = X_test_flatten/255.
 
+
 Y_train = convert_to_one_hot(Y_train_orig, 12)
 Y_test = convert_to_one_hot(Y_test_orig, 12)
 
 
-parameters = model(X_train, Y_train, X_test, Y_test)
 
 
 print("number of training examples = " + str(X_train.shape[1]))
