@@ -89,52 +89,32 @@ def load_dataset():
         loaded_images_test.append(img_data)
 
 
-    train_set_x_orig = np.array(loaded_images[:])  # your train set features
-    train_set_y_orig = np.array(y_train[:])  # your train set labels
+    train_set_x_orig = np.array(loaded_images)  # your train set features
+    train_set_y_orig = np.array(y_train)  # your train set labels
 
 
-    test_set_x_orig = np.array(loaded_images_test[:])  # your test set features
-    test_set_y_orig = np.array(y_test[:])  # your test set labels
+    test_set_x_orig = np.array(loaded_images_test)  # your test set features
+    test_set_y_orig = np.array(y_test)  # your test set labels
 
-    classes = np.array([1,2,3,4,5,6,7,8,9,10,11,12][:])  # the list of classes
+    classes = np.array([1,2,3,4,5,6,7,8,9,10,11,12])  # the list of classes
 
     train_set_y_orig = train_set_y_orig.reshape((1, train_set_y_orig.shape[0]))
     test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig.shape[0]))
-
     return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 
-
-def one_hot_matrix(labels, C):
-    ### START CODE HERE ###
-
-    # Create a tf.constant equal to C (depth), name it 'C'. (approx. 1 line)
-    C = tf.constant(C, name="C")
-
-    # Use tf.one_hot, be careful with the axis (approx. 1 line)
-    one_hot_matrix = tf.one_hot(labels, C, axis=0)
-
-    # Create the session (approx. 1 line)
-    sess = tf.Session()
-
-    # Run the session (approx. 1 line)
-    one_hot = sess.run(one_hot_matrix)
-
-    # Close the session (approx. 1 line). See method 1 above.
-    sess.close()
-
-    ### END CODE HERE ###
-
-    return one_hot
+def convert_to_one_hot(Y, C):
+    Y = np.eye(C)[Y.reshape(-1)].T
+    return Y
 
 X_train_orig, Y_train_orig, X_test_orig, Y_test_orig, classes = load_dataset()
+
 X_train_flatten = X_train_orig.reshape(X_train_orig.shape[0], -1).T
 X_test_flatten = X_test_orig.reshape(X_test_orig.shape[0], -1).T
-
 X_train = X_train_flatten/255.
 X_test = X_test_flatten/255.
 
-Y_train = one_hot_matrix(Y_train_orig, 12)
-Y_test = one_hot_matrix(Y_test_orig, 12)
+Y_train = convert_to_one_hot(Y_train_orig,12)
+Y_test = convert_to_one_hot(Y_test_orig,12)
 
 print ("number of training examples = " + str(X_train.shape[1]))
 print ("number of test examples = " + str(X_test.shape[1]))
