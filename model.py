@@ -16,12 +16,12 @@ def create_placeholders(n_x, n_y):
 def initialize_parameters():
     tf.set_random_seed(1)
 
-    W1 = tf.get_variable("W1", [25, 12288], initializer=tf.contrib.layers.xavier_initializer(seed=1))
-    b1 = tf.get_variable("b1", [25, 1], initializer=tf.zeros_initializer())
-    W2 = tf.get_variable("W2", [12, 25], initializer=tf.contrib.layers.xavier_initializer(seed=1))
-    b2 = tf.get_variable("b2", [12, 1], initializer=tf.zeros_initializer())
-    W3 = tf.get_variable("W3", [6, 12], initializer=tf.contrib.layers.xavier_initializer(seed=1))
-    b3 = tf.get_variable("b3", [6, 1], initializer=tf.zeros_initializer())
+    W1 = tf.get_variable("W1", [150, 150528], initializer=tf.contrib.layers.xavier_initializer(seed=1))
+    b1 = tf.get_variable("b1", [150, 1], initializer=tf.zeros_initializer())
+    W2 = tf.get_variable("W2", [95, 150], initializer=tf.contrib.layers.xavier_initializer(seed=1))
+    b2 = tf.get_variable("b2", [95, 1], initializer=tf.zeros_initializer())
+    W3 = tf.get_variable("W3", [12, 95], initializer=tf.contrib.layers.xavier_initializer(seed=1))
+    b3 = tf.get_variable("b3", [12, 1], initializer=tf.zeros_initializer())
 
     parameters = {"W1": W1,
                   "b1": b1,
@@ -127,8 +127,7 @@ X_test = X_test_flatten/255.
 Y_train = convert_to_one_hot(Y_train_orig, 12)
 Y_test = convert_to_one_hot(Y_test_orig, 12)
 
-
-
+parameters = model(X_train, Y_train, X_test, Y_test)
 
 print("number of training examples = " + str(X_train.shape[1]))
 print("number of test examples = " + str(X_test.shape[1]))
