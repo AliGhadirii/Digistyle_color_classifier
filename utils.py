@@ -89,10 +89,8 @@ def load_dataset():
         # store loaded image
         loaded_images_test.append(img_data)
 
-
     train_set_x_orig = np.array(loaded_images[:])  # your train set features
     train_set_y_orig = np.array(y_train[:])  # your train set labels
-
 
     test_set_x_orig = np.array(loaded_images_test[:])  # your test set features
     test_set_y_orig = np.array(y_test[:])  # your test set labels
