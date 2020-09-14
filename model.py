@@ -16,7 +16,7 @@ def create_placeholders(n_x, n_y):
 def initialize_parameters():
     tf.set_random_seed(1)
 
-    W1 = tf.get_variable("W1", [50, 12288], initializer=tf.contrib.layers.xavier_initializer(seed=1))
+    W1 = tf.get_variable("W1", [50, 37632], initializer=tf.contrib.layers.xavier_initializer(seed=1))
     b1 = tf.get_variable("b1", [50, 1], initializer=tf.zeros_initializer())
     W2 = tf.get_variable("W2", [25, 50 ], initializer=tf.contrib.layers.xavier_initializer(seed=1))
     b2 = tf.get_variable("b2", [25, 1], initializer=tf.zeros_initializer())
@@ -59,7 +59,7 @@ def compute_cost(Z3, Y):
 
 
 def model(X_train, Y_train, X_test, Y_test, learning_rate=0.0001,
-          num_epochs=1100, minibatch_size=128, print_cost=True):
+          num_epochs=1000, minibatch_size=64, print_cost=True):
     ops.reset_default_graph()  # to be able to rerun the model without overwriting tf variables
     tf.set_random_seed(1)  # to keep consistent results
     seed = 3  # to keep consistent results

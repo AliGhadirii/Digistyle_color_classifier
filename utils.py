@@ -8,56 +8,56 @@ def resize():
 
     for filename in listdir('pink'):
         img = cv2.imread('pink/'+filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('pink/'+filename,img)
 
     for filename in listdir('purple'):
         img = cv2.imread('purple/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('purple/' + filename, img)
     for filename in listdir('yellow'):
         img = cv2.imread('yellow/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('yellow/' + filename, img)
     for filename in listdir('orange'):
         img = cv2.imread('orange/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('orange/' + filename, img)
     for filename in listdir('white'):
         img = cv2.imread('white/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('white/' + filename, img)
     for filename in listdir('silver'):
         img = cv2.imread('silver/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('silver/' + filename, img)
     for filename in listdir('grey'):
         img = cv2.imread('grey/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('grey/' + filename, img)
     for filename in listdir('black'):
         img = cv2.imread('black/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('black/' + filename, img)
     for filename in listdir('red'):
         img = cv2.imread('red/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('red/' + filename, img)
     for filename in listdir('brown'):
         img = cv2.imread('brown/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('brown/' + filename, img)
     for filename in listdir('green'):
         img = cv2.imread('green/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('green/' + filename, img)
     for filename in listdir('blue'):
         img = cv2.imread('blue/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('blue/' + filename, img)
     for filename in listdir('test'):
         img = cv2.imread('test/' + filename)
-        img = cv2.resize(img, (64, 64))
+        img = cv2.resize(img, (112, 112))
         cv2.imwrite('test/' + filename, img)
     return 1
 
