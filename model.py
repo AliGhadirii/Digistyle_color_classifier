@@ -16,11 +16,11 @@ def create_placeholders(n_x, n_y):
 def initialize_parameters():
     tf.set_random_seed(1)
 
-    W1 = tf.get_variable("W1", [150, 150528], initializer=tf.contrib.layers.xavier_initializer(seed=1))
-    b1 = tf.get_variable("b1", [150, 1], initializer=tf.zeros_initializer())
-    W2 = tf.get_variable("W2", [95, 150], initializer=tf.contrib.layers.xavier_initializer(seed=1))
-    b2 = tf.get_variable("b2", [95, 1], initializer=tf.zeros_initializer())
-    W3 = tf.get_variable("W3", [12, 95], initializer=tf.contrib.layers.xavier_initializer(seed=1))
+    W1 = tf.get_variable("W1", [50, 12288], initializer=tf.contrib.layers.xavier_initializer(seed=1))
+    b1 = tf.get_variable("b1", [50, 1], initializer=tf.zeros_initializer())
+    W2 = tf.get_variable("W2", [25, 50 ], initializer=tf.contrib.layers.xavier_initializer(seed=1))
+    b2 = tf.get_variable("b2", [25, 1], initializer=tf.zeros_initializer())
+    W3 = tf.get_variable("W3", [12, 25], initializer=tf.contrib.layers.xavier_initializer(seed=1))
     b3 = tf.get_variable("b3", [12, 1], initializer=tf.zeros_initializer())
 
     parameters = {"W1": W1,
@@ -28,7 +28,8 @@ def initialize_parameters():
                   "W2": W2,
                   "b2": b2,
                   "W3": W3,
-                  "b3": b3}
+                  "b3": b3
+                  }
 
     return parameters
 
@@ -41,12 +42,12 @@ def forward_propagation(X, parameters):
     W3 = parameters['W3']
     b3 = parameters['b3']
 
+
     Z1 = tf.add(tf.matmul(W1, X), b1)  # Z1 = np.dot(W1, X) + b1
     A1 = tf.nn.relu(Z1)  # A1 = relu(Z1)
     Z2 = tf.add(tf.matmul(W2, A1), b2)  # Z2 = np.dot(W2, A1) + b2
     A2 = tf.nn.relu(Z2)  # A2 = relu(Z2)
     Z3 = tf.add(tf.matmul(W3, A2), b3)  # Z3 = np.dot(W3, A2) + b3
-
     return Z3
 
 
@@ -58,7 +59,7 @@ def compute_cost(Z3, Y):
 
 
 def model(X_train, Y_train, X_test, Y_test, learning_rate=0.0001,
-          num_epochs=1500, minibatch_size=32, print_cost=True):
+          num_epochs=1100, minibatch_size=128, print_cost=True):
     ops.reset_default_graph()  # to be able to rerun the model without overwriting tf variables
     tf.set_random_seed(1)  # to keep consistent results
     seed = 3  # to keep consistent results
@@ -70,7 +71,7 @@ def model(X_train, Y_train, X_test, Y_test, learning_rate=0.0001,
     parameters = initialize_parameters()
     Z3 = forward_propagation(X, parameters)
     cost = compute_cost(Z3, Y)
-    optimizer = optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
+    optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
     init = tf.global_variables_initializer()
 
     with tf.Session() as sess:
@@ -87,7 +88,7 @@ def model(X_train, Y_train, X_test, Y_test, learning_rate=0.0001,
                 (minibatch_X, minibatch_Y) = minibatch
                 _, minibatch_cost = sess.run([optimizer, cost], feed_dict={X: minibatch_X, Y: minibatch_Y})
                 epoch_cost += minibatch_cost / minibatch_size
-
+            print("we are in epoch #{}".format(epoch))
             if print_cost == True and epoch % 100 == 0:
                 print("Cost after epoch %i: %f" % (epoch, epoch_cost))
             if print_cost == True and epoch % 5 == 0:
@@ -127,11 +128,7 @@ X_test = X_test_flatten/255.
 Y_train = convert_to_one_hot(Y_train_orig, 12)
 Y_test = convert_to_one_hot(Y_test_orig, 12)
 
-parameters = model(X_train, Y_train, X_test, Y_test)
 
-print("number of training examples = " + str(X_train.shape[1]))
-print("number of test examples = " + str(X_test.shape[1]))
-print("X_train shape: " + str(X_train.shape))
-print("Y_train shape: " + str(Y_train.shape))
-print("X_test shape: " + str(X_test.shape))
-print("Y_test shape: " + str(Y_test.shape))
+parameters = model(X_train, Y_train, X_test, Y_test)
+print(parameters)
+
